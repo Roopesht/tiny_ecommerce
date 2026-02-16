@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "test-99u1b3"
+  },
+  "targets": {
+    "test-99u1b3": {
+      "hosting": {
+        "frontend": [
+          "ecommerce-frontend"
+        ]
+      }
+    }
+  }
+}

@@ -11,6 +11,7 @@ from firestore import get_document, add_document, update_document, query_documen
 from datetime import datetime
 from typing import List
 import logging
+from cache import cached, invalidate_cache
 
 logger = logging.getLogger(__name__)
 
@@ -81,6 +82,9 @@ async def place_order(current_user: FirebaseUser = Depends(get_current_user)):
             "updated_at": datetime.utcnow().isoformat() + "Z"
         })
 
+        # Invalidate cache
+        invalidate_cache(f"orders_{current_user.uid}")
+
         logger.info(f"Order {order_id} placed by user {current_user.uid} for amount {total_amount}")
 
         return PlaceOrderResponse(
@@ -100,11 +104,13 @@ async def place_order(current_user: FirebaseUser = Depends(get_current_user)):
 
 
 @router.get("", response_model=List[OrderResponse], status_code=200)
+@cached("orders")
 async def get_user_orders(current_user: FirebaseUser = Depends(get_current_user)):
     """
     Get all orders for the current user.
 
     Returns order history sorted by most recent first.
+    Results are cached for 60 seconds per user.
 
     Args:
         current_user: Authenticated user

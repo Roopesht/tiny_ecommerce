@@ -12,6 +12,7 @@ from models.schemas import (
 from firestore import get_document, add_document, update_document
 from datetime import datetime
 import logging
+from cache import cached, invalidate_cache
 
 logger = logging.getLogger(__name__)
 
@@ -27,11 +28,13 @@ async def get_user_cart(uid: str) -> dict:
 
 
 @router.get("", response_model=CartResponse, status_code=200)
+@cached("cart")
 async def get_cart(current_user: FirebaseUser = Depends(get_current_user)):
     """
     Get the current user's shopping cart.
 
     Returns all items in the user's cart with total calculations.
+    Results are cached for 60 seconds per user.
 
     Args:
         current_user: Authenticated user
@@ -52,13 +55,15 @@ async def get_cart(current_user: FirebaseUser = Depends(get_current_user)):
             for item in items
         )
 
-        logger.info(f"Retrieved cart for user: {current_user.uid}")
-
-        return CartResponse(
+        result = CartResponse(
             items=[CartItem(**item) for item in items],
             total_items=total_items,
             total_amount=total_amount
         )
+
+        logger.info(f"Retrieved cart for user: {current_user.uid}")
+
+        return result
 
     except Exception as e:
         logger.error(f"Error fetching cart: {str(e)}")
@@ -143,6 +148,9 @@ async def add_to_cart(
         else:
             add_document("carts", cart_data, doc_id=current_user.uid)
 
+        # Invalidate cache
+        invalidate_cache(f"cart_{current_user.uid}")
+
         logger.info(f"Added {request.quantity} of {request.product_id} to cart for {current_user.uid}")
 
         return {
@@ -215,6 +223,9 @@ async def remove_from_cart(
         }
 
         update_document("carts", current_user.uid, cart_data)
+
+        # Invalidate cache
+        invalidate_cache(f"cart_{current_user.uid}")
 
         logger.info(f"Removed {request.product_id} from cart for {current_user.uid}")
 
@@ -289,6 +300,9 @@ async def update_cart_quantity(
         }
 
         update_document("carts", current_user.uid, cart_data)
+
+        # Invalidate cache
+        invalidate_cache(f"cart_{current_user.uid}")
 
         logger.info(f"Updated {request.product_id} quantity to {request.quantity} for {current_user.uid}")
 

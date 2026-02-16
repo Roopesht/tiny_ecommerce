@@ -5,10 +5,11 @@
   "targets": {
     "test-99u1b3": {
       "hosting": {
-        "frontend": [
-          "ecommerce-frontend"
+        "tinyy-ecommerce": [
+          "tinyy-ecommerce"
         ]
       }
     }
-  }
+  },
+  "etags": {}
 }

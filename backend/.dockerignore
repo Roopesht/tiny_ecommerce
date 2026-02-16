@@ -35,6 +35,5 @@ coverage.xml
 .env
 .env.local
 .env.prod
-service-account.json
 *.md
 tests/

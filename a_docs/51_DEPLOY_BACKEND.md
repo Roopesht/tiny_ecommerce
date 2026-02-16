@@ -77,7 +77,7 @@ Collections needed:
 
 ### 2.3 Set Firestore Security Rules
 
-In Firebase Console → Firestore → Rules:
+In Firebase Console → Firestore → Rules (not needed for TEST):
 
 ```javascript
 rules_version = '2';

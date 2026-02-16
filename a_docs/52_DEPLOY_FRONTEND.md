@@ -210,6 +210,8 @@ Should show `test-99u1b3` project.
 
 ```bash
 firebase hosting:sites:list
+
+firebase target:apply hosting tinyy-ecommerce tinyy-ecommerce
 ```
 
 ## Phase 6: Deploy to Firebase Hosting

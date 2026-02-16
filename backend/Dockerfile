@@ -1,7 +1,6 @@
-# Multi-stage build for Python FastAPI application
+# Python FastAPI application
 
-# Stage 1: Builder
-FROM python:3.11-slim as builder
+FROM python:3.11-slim
 
 # Set working directory
 WORKDIR /app
@@ -10,32 +9,14 @@ WORKDIR /app
 COPY requirements.txt .
 
 # Install dependencies
-RUN pip install --no-cache-dir --user -r requirements.txt
-
-
-# Stage 2: Runtime
-FROM python:3.11-slim
-
-# Set working directory
-WORKDIR /app
-
-# Copy Python dependencies from builder
-COPY --from=builder /root/.local /root/.local
-
-# Add local pip directory to PATH
-ENV PATH=/root/.local/bin:$PATH \
-    PYTHONUNBUFFERED=1 \
-    PYTHONDONTWRITEBYTECODE=1
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy application code
 COPY . .
 
-# Create non-root user for security
-RUN useradd -m -u 1000 appuser && \
-    chown -R appuser:appuser /app
-
-# Switch to non-root user
-USER appuser
+# Set environment variables
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1
 
 # Expose port (Cloud Run uses 8080)
 EXPOSE 8080

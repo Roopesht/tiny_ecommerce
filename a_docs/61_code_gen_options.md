@@ -1,0 +1,3 @@
+1.	Keep the code intentionally simple and beginner-friendly. Since this is for training, the examples should be easy to read, understand, and follow without overwhelming newcomers.
+2.	The primary learning focus is deployment, observability, and cloud usage (Cloud Run and Firebase Static Hosting). Ensure every step is clearly explained and practical enough for learners to execute on their own.
+3.	Create a steps.md document that provides a complete, step-by-step deployment guide, including all required context such as project names, service names, URLs, and configuration details needed to successfully deploy the application.

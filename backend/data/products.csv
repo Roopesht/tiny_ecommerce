@@ -1,0 +1,11 @@
+product_id,name,description,price,image_url,stock,category
+wireless_mouse,Wireless Mouse,Ergonomic wireless mouse with 2.4GHz connectivity and 2-year battery life,899,https://images.unsplash.com/photo-1527814050087-3793815479db?w=300,50,Electronics
+mechanical_keyboard,Mechanical Keyboard,RGB backlit mechanical keyboard with Cherry MX switches,4999,https://images.unsplash.com/photo-1587829191301-4b035b7c0f3d?w=300,30,Electronics
+usb_hub,USB Hub,7-port USB 3.0 hub with fast charging,1499,https://images.unsplash.com/photo-1620945557595-6788ea6d5651?w=300,40,Electronics
+laptop_stand,Laptop Stand,Adjustable aluminum laptop stand for better ergonomics,2499,https://images.unsplash.com/photo-1587829191301-4b035b7c0f3d?w=300,25,Office
+monitor_light,Monitor Light,Eye-care LED monitor light bar for desk lamp,3499,https://images.unsplash.com/photo-1565636192335-14f9e6f94e34?w=300,20,Office
+webcam_1080p,Webcam 1080P,Full HD 1080P webcam with built-in microphone and auto focus,2799,https://images.unsplash.com/photo-1598288309157-c537fb3213de?w=300,35,Electronics
+mouse_pad,Mouse Pad,XL size gaming mouse pad with non-slip rubber base,799,https://images.unsplash.com/photo-1619983081563-430f63602d4e?w=300,100,Office
+external_ssd,External SSD 1TB,Portable 1TB external SSD with USB-C for fast transfers,6999,https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?w=300,15,Storage
+hdmi_cable,HDMI 2.1 Cable 2M,High-speed HDMI 2.1 cable supporting 4K@120Hz,799,https://images.unsplash.com/photo-1620945557595-6788ea6d5651?w=300,80,Electronics
+desk_organizer,Desk Organizer,Multi-compartment wooden desk organizer,1299,https://images.unsplash.com/photo-1578500494198-246f612d03b3?w=300,45,Office

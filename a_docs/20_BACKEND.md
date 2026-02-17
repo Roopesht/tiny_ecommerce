@@ -18,7 +18,7 @@ The backend is a FastAPI application that serves as the REST API for the e-comme
 ### Application Structure
 
 ```
-ecommerce-backend/
+backend/
 ├── main.py                          # FastAPI application entry point
 ├── config.py                        # Environment configuration
 ├── firestore.py                     # Firestore client and helpers
@@ -75,7 +75,7 @@ graph TD
 
 1. **Clone the repository**
 ```bash
-cd ecommerce-backend
+cd backend
 ```
 
 2. **Create virtual environment**

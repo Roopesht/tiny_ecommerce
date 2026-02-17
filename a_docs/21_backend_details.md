@@ -21,7 +21,7 @@ Complete implementation guide with code examples, patterns, and best practices.
 ### 1.1 Create Directory Structure
 
 ```bash
-cd ecommerce-backend
+cd backend
 
 # Create directories
 mkdir -p middleware utils routes models scripts data docs

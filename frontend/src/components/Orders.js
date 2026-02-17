@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { apiCall } from '../utils/api';
+import commonStyles from '../styles/commonStyles';
 
 const Orders = ({ onNavigate }) => {
   const [orders, setOrders] = useState([]);
@@ -56,162 +57,30 @@ const Orders = ({ onNavigate }) => {
     }
   };
 
-  const styles = {
-    container: {
-      maxWidth: '900px',
-      margin: '0 auto',
-      padding: '40px 20px',
-      fontFamily: 'system-ui, -apple-system, sans-serif',
-    },
-    heading: {
-      fontSize: '28px',
-      fontWeight: 'bold',
-      color: '#333',
-      marginBottom: '30px',
-    },
-    errorMessage: {
-      padding: '15px',
-      backgroundColor: '#f8d7da',
-      color: '#721c24',
-      border: '1px solid #f5c6cb',
-      borderRadius: '4px',
-      marginBottom: '20px',
-    },
-    loadingMessage: {
-      textAlign: 'center',
-      fontSize: '16px',
-      color: '#666',
-      padding: '40px',
-    },
-    emptyMessage: {
-      textAlign: 'center',
-      fontSize: '16px',
-      color: '#666',
-      padding: '40px',
-      backgroundColor: '#f8f9fa',
-      borderRadius: '4px',
-      marginBottom: '20px',
-    },
-    orderCard: {
-      border: '1px solid #ddd',
-      borderRadius: '4px',
-      marginBottom: '15px',
-      overflow: 'hidden',
-      backgroundColor: 'white',
-    },
-    orderHeader: {
-      padding: '15px',
-      backgroundColor: '#f8f9fa',
-      cursor: 'pointer',
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      borderBottom: '1px solid #ddd',
-      transition: 'background-color 0.3s',
-    },
-    orderHeaderHover: {
-      backgroundColor: '#e9ecef',
-    },
-    orderInfo: {
-      display: 'grid',
-      gridTemplateColumns: '1fr 1fr 1fr 1fr',
-      gap: '20px',
-      alignItems: 'center',
-      flex: 1,
-    },
-    orderLabel: {
-      fontSize: '12px',
-      color: '#666',
-      marginBottom: '4px',
-    },
-    orderValue: {
-      fontSize: '16px',
-      fontWeight: 'bold',
-      color: '#333',
-    },
-    statusBadge: {
-      padding: '5px 12px',
-      borderRadius: '4px',
-      color: 'white',
-      fontWeight: 'bold',
-      fontSize: '12px',
-      display: 'inline-block',
-    },
-    expandIcon: {
-      fontSize: '20px',
-      color: '#666',
-      marginLeft: '20px',
-    },
-    orderDetails: {
-      padding: '15px',
-      backgroundColor: '#fafafa',
-      borderTop: '1px solid #ddd',
-    },
-    itemsTable: {
-      width: '100%',
-      borderCollapse: 'collapse',
-      marginBottom: '15px',
-    },
-    tableHeader: {
-      backgroundColor: '#f0f0f0',
-      borderBottom: '1px solid #ddd',
-    },
-    tableHeaderCell: {
-      padding: '10px',
-      textAlign: 'left',
-      fontWeight: 'bold',
-      fontSize: '12px',
-      color: '#333',
-    },
-    tableCell: {
-      padding: '10px',
-      borderBottom: '1px solid #ddd',
-      fontSize: '14px',
-    },
-    totalSection: {
-      textAlign: 'right',
-      padding: '10px',
-      fontWeight: 'bold',
-      fontSize: '16px',
-      color: '#007bff',
-    },
-    button: {
-      padding: '12px 24px',
-      backgroundColor: '#007bff',
-      color: 'white',
-      border: 'none',
-      borderRadius: '4px',
-      fontSize: '16px',
-      fontWeight: 'bold',
-      cursor: 'pointer',
-      width: '100%',
-      marginTop: '20px',
-    },
-  };
 
   if (loading) {
     return (
-      <div style={styles.container}>
-        <div style={styles.loadingMessage}>Loading orders...</div>
+      <div style={commonStyles.containerMedium}>
+        <div style={commonStyles.loadingMessage}>Loading orders...</div>
       </div>
     );
   }
 
   return (
-    <div style={styles.container}>
-      <h1 style={styles.heading}>Order History</h1>
+    <div style={commonStyles.containerMedium}>
+      <h1 style={commonStyles.headingMedium}>Order History</h1>
 
-      {error && <div style={styles.errorMessage}>{error}</div>}
+      {error && <div style={commonStyles.errorMessage}>{error}</div>}
 
       {orders.length === 0 ? (
-        <div style={styles.emptyMessage}>
+        <div style={commonStyles.emptyMessage}>
           You have no orders yet.
         </div>
       ) : (
         orders.map((order) => (
-          <div key={order.id} style={styles.orderCard}>
+          <div key={order.id} style={commonStyles.orderCard}>
             <div
-              style={styles.orderHeader}
+              style={commonStyles.orderHeader}
               onMouseEnter={(e) => {
                 e.currentTarget.style.backgroundColor = '#e9ecef';
               }}
@@ -222,22 +91,22 @@ const Orders = ({ onNavigate }) => {
               role="button"
               tabIndex={0}
             >
-              <div style={styles.orderInfo}>
+              <div style={commonStyles.orderInfo}>
                 <div>
-                  <div style={styles.orderLabel}>Order ID</div>
-                  <div style={styles.orderValue}>{order.id}</div>
+                  <div style={commonStyles.orderLabel}>Order ID</div>
+                  <div style={commonStyles.orderValue}>{order.id}</div>
                 </div>
                 <div>
-                  <div style={styles.orderLabel}>Date</div>
-                  <div style={styles.orderValue}>
+                  <div style={commonStyles.orderLabel}>Date</div>
+                  <div style={commonStyles.orderValue}>
                     {formatDate(order.created_at)}
                   </div>
                 </div>
                 <div>
-                  <div style={styles.orderLabel}>Status</div>
+                  <div style={commonStyles.orderLabel}>Status</div>
                   <div
                     style={{
-                      ...styles.statusBadge,
+                      ...commonStyles.statusBadge,
                       backgroundColor: getStatusColor(order.status),
                     }}
                   >
@@ -245,47 +114,47 @@ const Orders = ({ onNavigate }) => {
                   </div>
                 </div>
                 <div>
-                  <div style={styles.orderLabel}>Total</div>
-                  <div style={styles.orderValue}>
+                  <div style={commonStyles.orderLabel}>Total</div>
+                  <div style={commonStyles.orderValue}>
                     ₹{order.total_amount?.toLocaleString()}
                   </div>
                 </div>
               </div>
-              <div style={styles.expandIcon}>
+              <div style={{ fontSize: '20px', color: '#666', marginLeft: '20px' }}>
                 {expandedOrderId === order.id ? '▼' : '▶'}
               </div>
             </div>
 
             {expandedOrderId === order.id && (
-              <div style={styles.orderDetails}>
+              <div style={commonStyles.orderDetails}>
                 <h4 style={{ marginTop: 0, color: '#333' }}>
                   Order Items
                 </h4>
-                <table style={styles.itemsTable}>
-                  <thead style={styles.tableHeader}>
+                <table style={commonStyles.table}>
+                  <thead style={commonStyles.tableHeader}>
                     <tr>
-                      <th style={styles.tableHeaderCell}>Product</th>
-                      <th style={styles.tableHeaderCell}>Price</th>
-                      <th style={styles.tableHeaderCell}>Quantity</th>
-                      <th style={styles.tableHeaderCell}>Subtotal</th>
+                      <th style={commonStyles.tableHeaderCell}>Product</th>
+                      <th style={commonStyles.tableHeaderCell}>Price</th>
+                      <th style={commonStyles.tableHeaderCell}>Quantity</th>
+                      <th style={commonStyles.tableHeaderCell}>Subtotal</th>
                     </tr>
                   </thead>
                   <tbody>
                     {(order.items || []).map((item, index) => (
                       <tr key={index}>
-                        <td style={styles.tableCell}>{item.name}</td>
-                        <td style={styles.tableCell}>
+                        <td style={commonStyles.tableCell}>{item.name}</td>
+                        <td style={commonStyles.tableCell}>
                           ₹{item.price?.toLocaleString()}
                         </td>
-                        <td style={styles.tableCell}>{item.quantity}</td>
-                        <td style={styles.tableCell}>
+                        <td style={commonStyles.tableCell}>{item.quantity}</td>
+                        <td style={commonStyles.tableCell}>
                           ₹{(item.price * item.quantity).toLocaleString()}
                         </td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
-                <div style={styles.totalSection}>
+                <div style={{ textAlign: 'right', padding: '10px', fontWeight: 'bold', fontSize: '16px', color: '#007bff' }}>
                   Order Total: ₹{order.total_amount?.toLocaleString()}
                 </div>
               </div>
@@ -296,7 +165,7 @@ const Orders = ({ onNavigate }) => {
 
       <button
         onClick={() => onNavigate('dashboard')}
-        style={styles.button}
+        style={{ ...commonStyles.button, width: '100%', marginTop: '20px' }}
       >
         Back to Dashboard
       </button>

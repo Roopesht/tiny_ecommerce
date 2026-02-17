@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
+import commonStyles from '../styles/commonStyles';
 
 const Login = ({ onSwitchToRegister }) => {
   const { login, loading, error: authError } = useAuth();
@@ -50,120 +51,26 @@ const Login = ({ onSwitchToRegister }) => {
     }
   };
 
-  const styles = {
-    container: {
-      maxWidth: '400px',
-      margin: '50px auto',
-      padding: '30px',
-      border: '1px solid #ddd',
-      borderRadius: '8px',
-      boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
-      fontFamily: 'system-ui, -apple-system, sans-serif',
-    },
-    heading: {
-      textAlign: 'center',
-      color: '#333',
-      marginBottom: '30px',
-      fontSize: '28px',
-      fontWeight: 'bold',
-    },
-    formGroup: {
-      marginBottom: '20px',
-    },
-    label: {
-      display: 'block',
-      marginBottom: '8px',
-      color: '#333',
-      fontWeight: '500',
-      fontSize: '14px',
-    },
-    input: {
-      width: '100%',
-      padding: '10px 12px',
-      border: '1px solid #ddd',
-      borderRadius: '4px',
-      fontSize: '14px',
-      boxSizing: 'border-box',
-      fontFamily: 'system-ui, -apple-system, sans-serif',
-      transition: 'border-color 0.3s',
-    },
-    inputFocus: {
-      borderColor: '#007bff',
-      outline: 'none',
-    },
-    button: {
-      width: '100%',
-      padding: '12px',
-      backgroundColor: '#007bff',
-      color: 'white',
-      border: 'none',
-      borderRadius: '4px',
-      fontSize: '16px',
-      fontWeight: 'bold',
-      cursor: 'pointer',
-      transition: 'background-color 0.3s',
-      marginTop: '10px',
-    },
-    buttonDisabled: {
-      backgroundColor: '#ccc',
-      cursor: 'not-allowed',
-    },
-    errorMessage: {
-      padding: '12px',
-      backgroundColor: '#f8d7da',
-      color: '#721c24',
-      border: '1px solid #f5c6cb',
-      borderRadius: '4px',
-      marginBottom: '20px',
-      fontSize: '14px',
-    },
-    successMessage: {
-      padding: '12px',
-      backgroundColor: '#d4edda',
-      color: '#155724',
-      border: '1px solid #c3e6cb',
-      borderRadius: '4px',
-      marginBottom: '20px',
-      fontSize: '14px',
-    },
-    linkContainer: {
-      textAlign: 'center',
-      marginTop: '20px',
-      fontSize: '14px',
-      color: '#666',
-    },
-    link: {
-      color: '#007bff',
-      cursor: 'pointer',
-      textDecoration: 'none',
-      fontWeight: 'bold',
-      marginLeft: '5px',
-    },
-    loadingText: {
-      fontSize: '14px',
-      color: '#666',
-    },
-  };
 
   return (
-    <div style={styles.container}>
-      <h2 style={styles.heading}>Login</h2>
+    <div style={commonStyles.containerForm}>
+      <h2 style={{ textAlign: 'center', color: '#333', marginBottom: '30px', fontSize: '28px', fontWeight: 'bold' }}>Login</h2>
 
       {(error || authError) && (
-        <div style={styles.errorMessage}>
+        <div style={commonStyles.errorMessage}>
           {error || authError}
         </div>
       )}
 
       {success && (
-        <div style={styles.successMessage}>
+        <div style={commonStyles.successMessage}>
           {success}
         </div>
       )}
 
       <form onSubmit={handleSubmit}>
-        <div style={styles.formGroup}>
-          <label htmlFor="email" style={styles.label}>
+        <div style={commonStyles.formGroup}>
+          <label htmlFor="email" style={commonStyles.label}>
             Email
           </label>
           <input
@@ -174,13 +81,13 @@ const Login = ({ onSwitchToRegister }) => {
             onChange={handleChange}
             disabled={loading}
             placeholder="you@example.com"
-            style={styles.input}
+            style={commonStyles.input}
             required
           />
         </div>
 
-        <div style={styles.formGroup}>
-          <label htmlFor="password" style={styles.label}>
+        <div style={commonStyles.formGroup}>
+          <label htmlFor="password" style={commonStyles.label}>
             Password
           </label>
           <input
@@ -191,7 +98,7 @@ const Login = ({ onSwitchToRegister }) => {
             onChange={handleChange}
             disabled={loading}
             placeholder="Enter your password"
-            style={styles.input}
+            style={commonStyles.input}
             required
           />
         </div>
@@ -200,18 +107,19 @@ const Login = ({ onSwitchToRegister }) => {
           type="submit"
           disabled={loading}
           style={{
-            ...styles.button,
-            ...(loading && styles.buttonDisabled),
+            ...commonStyles.buttonFull,
+            ...(loading && commonStyles.buttonDisabled),
+            marginTop: '10px',
           }}
         >
           {loading ? 'Logging in...' : 'Login'}
         </button>
       </form>
 
-      <div style={styles.linkContainer}>
+      <div style={commonStyles.linkContainer}>
         Don't have an account?
         <span
-          style={styles.link}
+          style={commonStyles.link}
           onClick={onSwitchToRegister}
           role="button"
           tabIndex={0}

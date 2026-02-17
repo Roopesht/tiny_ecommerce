@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { apiCall } from '../utils/api';
+import commonStyles from '../styles/commonStyles';
 
 const Cart = ({ onNavigate }) => {
   const [cartItems, setCartItems] = useState([]);
@@ -95,156 +96,24 @@ const Cart = ({ onNavigate }) => {
     }
   };
 
-  const styles = {
-    container: {
-      maxWidth: '1000px',
-      margin: '0 auto',
-      padding: '40px 20px',
-      fontFamily: 'system-ui, -apple-system, sans-serif',
-    },
-    heading: {
-      fontSize: '28px',
-      fontWeight: 'bold',
-      color: '#333',
-      marginBottom: '30px',
-    },
-    errorMessage: {
-      padding: '15px',
-      backgroundColor: '#f8d7da',
-      color: '#721c24',
-      border: '1px solid #f5c6cb',
-      borderRadius: '4px',
-      marginBottom: '20px',
-    },
-    successMessage: {
-      padding: '15px',
-      backgroundColor: '#d4edda',
-      color: '#155724',
-      border: '1px solid #c3e6cb',
-      borderRadius: '4px',
-      marginBottom: '20px',
-    },
-    loadingMessage: {
-      textAlign: 'center',
-      fontSize: '16px',
-      color: '#666',
-      padding: '40px',
-    },
-    emptyMessage: {
-      textAlign: 'center',
-      fontSize: '16px',
-      color: '#666',
-      padding: '40px',
-      backgroundColor: '#f8f9fa',
-      borderRadius: '4px',
-      marginBottom: '20px',
-    },
-    table: {
-      width: '100%',
-      borderCollapse: 'collapse',
-      marginBottom: '30px',
-      border: '1px solid #ddd',
-    },
-    tableHeader: {
-      backgroundColor: '#f8f9fa',
-      borderBottom: '2px solid #ddd',
-    },
-    tableHeaderCell: {
-      padding: '12px',
-      textAlign: 'left',
-      fontWeight: 'bold',
-      color: '#333',
-      fontSize: '14px',
-    },
-    tableCell: {
-      padding: '12px',
-      borderBottom: '1px solid #ddd',
-      fontSize: '14px',
-    },
-    tableRow: {
-      backgroundColor: 'white',
-    },
-    tableRowAlt: {
-      backgroundColor: '#fafafa',
-    },
-    quantityInput: {
-      width: '60px',
-      padding: '5px',
-      border: '1px solid #ddd',
-      borderRadius: '4px',
-      fontSize: '14px',
-      textAlign: 'center',
-    },
-    removeButton: {
-      padding: '5px 10px',
-      backgroundColor: '#dc3545',
-      color: 'white',
-      border: 'none',
-      borderRadius: '4px',
-      fontSize: '12px',
-      cursor: 'pointer',
-      marginRight: '10px',
-    },
-    totalContainer: {
-      textAlign: 'right',
-      padding: '20px',
-      borderTop: '2px solid #ddd',
-      backgroundColor: '#f8f9fa',
-      borderRadius: '4px',
-      marginBottom: '30px',
-    },
-    totalLabel: {
-      fontSize: '18px',
-      fontWeight: 'bold',
-      color: '#333',
-    },
-    totalAmount: {
-      fontSize: '24px',
-      fontWeight: 'bold',
-      color: '#007bff',
-    },
-    buttonContainer: {
-      display: 'flex',
-      gap: '10px',
-      justifyContent: 'center',
-    },
-    button: {
-      padding: '12px 24px',
-      backgroundColor: '#007bff',
-      color: 'white',
-      border: 'none',
-      borderRadius: '4px',
-      fontSize: '16px',
-      fontWeight: 'bold',
-      cursor: 'pointer',
-      flex: 1,
-    },
-    buttonGreen: {
-      backgroundColor: '#28a745',
-    },
-    buttonDisabled: {
-      backgroundColor: '#ccc',
-      cursor: 'not-allowed',
-    },
-  };
 
   if (loading) {
     return (
-      <div style={styles.container}>
-        <div style={styles.loadingMessage}>Loading cart...</div>
+      <div style={commonStyles.containerSmall}>
+        <div style={commonStyles.loadingMessage}>Loading cart...</div>
       </div>
     );
   }
 
   return (
-    <div style={styles.container}>
-      <h1 style={styles.heading}>Shopping Cart</h1>
+    <div style={commonStyles.containerSmall}>
+      <h1 style={commonStyles.headingMedium}>Shopping Cart</h1>
 
-      {error && <div style={styles.errorMessage}>{error}</div>}
-      {success && <div style={styles.successMessage}>{success}</div>}
+      {error && <div style={commonStyles.errorMessage}>{error}</div>}
+      {success && <div style={commonStyles.successMessage}>{success}</div>}
 
       {cartItems.length === 0 ? (
-        <div style={styles.emptyMessage}>
+        <div style={commonStyles.emptyMessage}>
           Your cart is empty. <br />
           <button
             onClick={() => onNavigate('products')}
@@ -263,27 +132,27 @@ const Cart = ({ onNavigate }) => {
         </div>
       ) : (
         <>
-          <table style={styles.table}>
-            <thead style={styles.tableHeader}>
+          <table style={commonStyles.table}>
+            <thead style={commonStyles.tableHeader}>
               <tr>
-                <th style={styles.tableHeaderCell}>Product</th>
-                <th style={styles.tableHeaderCell}>Price</th>
-                <th style={styles.tableHeaderCell}>Quantity</th>
-                <th style={styles.tableHeaderCell}>Subtotal</th>
-                <th style={styles.tableHeaderCell}>Actions</th>
+                <th style={commonStyles.tableHeaderCell}>Product</th>
+                <th style={commonStyles.tableHeaderCell}>Price</th>
+                <th style={commonStyles.tableHeaderCell}>Quantity</th>
+                <th style={commonStyles.tableHeaderCell}>Subtotal</th>
+                <th style={commonStyles.tableHeaderCell}>Actions</th>
               </tr>
             </thead>
             <tbody>
               {cartItems.map((item, index) => (
                 <tr
                   key={item.product_id}
-                  style={index % 2 === 0 ? styles.tableRow : styles.tableRowAlt}
+                  style={index % 2 === 0 ? commonStyles.tableRow : commonStyles.tableRowAlt}
                 >
-                  <td style={styles.tableCell}>{item.name}</td>
-                  <td style={styles.tableCell}>
+                  <td style={commonStyles.tableCell}>{item.name}</td>
+                  <td style={commonStyles.tableCell}>
                     ₹{item.price?.toLocaleString() || 'N/A'}
                   </td>
-                  <td style={styles.tableCell}>
+                  <td style={commonStyles.tableCell}>
                     <input
                       type="number"
                       min="1"
@@ -294,17 +163,17 @@ const Cart = ({ onNavigate }) => {
                           Math.max(1, parseInt(e.target.value) || 1)
                         )
                       }
-                      style={styles.quantityInput}
+                      style={commonStyles.quantityInput}
                       disabled={actionLoading}
                     />
                   </td>
-                  <td style={styles.tableCell}>
+                  <td style={commonStyles.tableCell}>
                     ₹{(item.price * item.quantity).toLocaleString()}
                   </td>
-                  <td style={styles.tableCell}>
+                  <td style={commonStyles.tableCell}>
                     <button
                       onClick={() => handleRemoveItem(item.product_id)}
-                      style={styles.removeButton}
+                      style={commonStyles.buttonSmall}
                       disabled={actionLoading}
                     >
                       Remove
@@ -315,18 +184,18 @@ const Cart = ({ onNavigate }) => {
             </tbody>
           </table>
 
-          <div style={styles.totalContainer}>
-            <div style={styles.totalLabel}>
-              Total: <span style={styles.totalAmount}>₹{totalAmount.toLocaleString()}</span>
+          <div style={commonStyles.totalContainer}>
+            <div style={commonStyles.totalLabel}>
+              Total: <span style={commonStyles.totalAmount}>₹{totalAmount.toLocaleString()}</span>
             </div>
           </div>
         </>
       )}
 
-      <div style={styles.buttonContainer}>
+      <div style={commonStyles.buttonContainerFlex}>
         <button
           onClick={() => onNavigate('products')}
-          style={styles.button}
+          style={commonStyles.button}
         >
           Continue Shopping
         </button>
@@ -335,10 +204,10 @@ const Cart = ({ onNavigate }) => {
             onClick={handlePlaceOrder}
             disabled={actionLoading || cartItems.length === 0}
             style={{
-              ...styles.button,
-              ...styles.buttonGreen,
+              ...commonStyles.button,
+              ...commonStyles.buttonSuccess,
               ...(actionLoading || cartItems.length === 0
-                ? styles.buttonDisabled
+                ? commonStyles.buttonDisabled
                 : {}),
             }}
           >

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
+import commonStyles from '../styles/commonStyles';
 
 const Register = ({ onSwitchToLogin }) => {
   const { register, loading, error: authError } = useAuth();
@@ -84,117 +85,26 @@ const Register = ({ onSwitchToLogin }) => {
     }
   };
 
-  const styles = {
-    container: {
-      maxWidth: '450px',
-      margin: '30px auto',
-      padding: '30px',
-      border: '1px solid #ddd',
-      borderRadius: '8px',
-      boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
-      fontFamily: 'system-ui, -apple-system, sans-serif',
-    },
-    heading: {
-      textAlign: 'center',
-      color: '#333',
-      marginBottom: '30px',
-      fontSize: '28px',
-      fontWeight: 'bold',
-    },
-    formGroup: {
-      marginBottom: '20px',
-    },
-    twoColumnGroup: {
-      display: 'grid',
-      gridTemplateColumns: '1fr 1fr',
-      gap: '15px',
-      marginBottom: '20px',
-    },
-    label: {
-      display: 'block',
-      marginBottom: '8px',
-      color: '#333',
-      fontWeight: '500',
-      fontSize: '14px',
-    },
-    input: {
-      width: '100%',
-      padding: '10px 12px',
-      border: '1px solid #ddd',
-      borderRadius: '4px',
-      fontSize: '14px',
-      boxSizing: 'border-box',
-      fontFamily: 'system-ui, -apple-system, sans-serif',
-    },
-    button: {
-      width: '100%',
-      padding: '12px',
-      backgroundColor: '#007bff',
-      color: 'white',
-      border: 'none',
-      borderRadius: '4px',
-      fontSize: '16px',
-      fontWeight: 'bold',
-      cursor: 'pointer',
-      transition: 'background-color 0.3s',
-      marginTop: '10px',
-    },
-    buttonDisabled: {
-      backgroundColor: '#ccc',
-      cursor: 'not-allowed',
-    },
-    errorMessage: {
-      padding: '12px',
-      backgroundColor: '#f8d7da',
-      color: '#721c24',
-      border: '1px solid #f5c6cb',
-      borderRadius: '4px',
-      marginBottom: '20px',
-      fontSize: '14px',
-    },
-    successMessage: {
-      padding: '12px',
-      backgroundColor: '#d4edda',
-      color: '#155724',
-      border: '1px solid #c3e6cb',
-      borderRadius: '4px',
-      marginBottom: '20px',
-      fontSize: '14px',
-    },
-    linkContainer: {
-      textAlign: 'center',
-      marginTop: '20px',
-      fontSize: '14px',
-      color: '#666',
-    },
-    link: {
-      color: '#007bff',
-      cursor: 'pointer',
-      textDecoration: 'none',
-      fontWeight: 'bold',
-      marginLeft: '5px',
-    },
-  };
 
   return (
-    <div style={styles.container}>
-      <h2 style={styles.heading}>Register</h2>
+    <div style={commonStyles.containerLargeForm}>
+      <h2 style={{ textAlign: 'center', color: '#333', marginBottom: '30px', fontSize: '28px', fontWeight: 'bold' }}>Register</h2>
 
       {(error || authError) && (
-        <div style={styles.errorMessage}>
+        <div style={commonStyles.errorMessage}>
           {error || authError}
         </div>
       )}
 
       {success && (
-        <div style={styles.successMessage}>
+        <div style={commonStyles.successMessage}>
           {success}
         </div>
       )}
 
       <form onSubmit={handleSubmit}>
-        <div style={styles.formGroup}>
-          <label htmlFor="email" style={styles.label}>
+        <div style={commonStyles.formGroup}>
+          <label htmlFor="email" style={commonStyles.label}>
             Email
           </label>
           <input
@@ -205,13 +115,13 @@ const Register = ({ onSwitchToLogin }) => {
             onChange={handleChange}
             disabled={loading}
             placeholder="you@example.com"
-            style={styles.input}
+            style={commonStyles.input}
             required
           />
         </div>
 
-        <div style={styles.formGroup}>
-          <label htmlFor="password" style={styles.label}>
+        <div style={commonStyles.formGroup}>
+          <label htmlFor="password" style={commonStyles.label}>
             Password
           </label>
           <input
@@ -222,13 +132,13 @@ const Register = ({ onSwitchToLogin }) => {
             onChange={handleChange}
             disabled={loading}
             placeholder="At least 6 characters"
-            style={styles.input}
+            style={commonStyles.input}
             required
           />
         </div>
 
-        <div style={styles.formGroup}>
-          <label htmlFor="confirmPassword" style={styles.label}>
+        <div style={commonStyles.formGroup}>
+          <label htmlFor="confirmPassword" style={commonStyles.label}>
             Confirm Password
           </label>
           <input
@@ -239,14 +149,14 @@ const Register = ({ onSwitchToLogin }) => {
             onChange={handleChange}
             disabled={loading}
             placeholder="Confirm your password"
-            style={styles.input}
+            style={commonStyles.input}
             required
           />
         </div>
 
-        <div style={styles.twoColumnGroup}>
+        <div style={commonStyles.twoColumnGroup}>
           <div>
-            <label htmlFor="firstname" style={styles.label}>
+            <label htmlFor="firstname" style={commonStyles.label}>
               First Name
             </label>
             <input
@@ -257,12 +167,12 @@ const Register = ({ onSwitchToLogin }) => {
               onChange={handleChange}
               disabled={loading}
               placeholder="John"
-              style={styles.input}
+              style={commonStyles.input}
               required
             />
           </div>
           <div>
-            <label htmlFor="lastname" style={styles.label}>
+            <label htmlFor="lastname" style={commonStyles.label}>
               Last Name
             </label>
             <input
@@ -273,14 +183,14 @@ const Register = ({ onSwitchToLogin }) => {
               onChange={handleChange}
               disabled={loading}
               placeholder="Doe"
-              style={styles.input}
+              style={commonStyles.input}
               required
             />
           </div>
         </div>
 
-        <div style={styles.formGroup}>
-          <label htmlFor="mobilenumber" style={styles.label}>
+        <div style={commonStyles.formGroup}>
+          <label htmlFor="mobilenumber" style={commonStyles.label}>
             Mobile Number (10 digits)
           </label>
           <input
@@ -291,7 +201,7 @@ const Register = ({ onSwitchToLogin }) => {
             onChange={handleChange}
             disabled={loading}
             placeholder="1234567890"
-            style={styles.input}
+            style={commonStyles.input}
             required
           />
         </div>
@@ -300,18 +210,19 @@ const Register = ({ onSwitchToLogin }) => {
           type="submit"
           disabled={loading}
           style={{
-            ...styles.button,
-            ...(loading && styles.buttonDisabled),
+            ...commonStyles.buttonFull,
+            ...(loading && commonStyles.buttonDisabled),
+            marginTop: '10px',
           }}
         >
           {loading ? 'Registering...' : 'Register'}
         </button>
       </form>
 
-      <div style={styles.linkContainer}>
+      <div style={commonStyles.linkContainer}>
         Already have an account?
         <span
-          style={styles.link}
+          style={commonStyles.link}
           onClick={onSwitchToLogin}
           role="button"
           tabIndex={0}
